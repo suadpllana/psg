@@ -89,10 +89,10 @@ export const matchesInfo = [
     venue: "Parc des Princes",
     status: "completed",
     goals: [
-      { player: "Ousmane Dembélé", minute: 15, team: "PSG" },
-      { player: "Gonçalo Ramos", minute: 42, team: "PSG" },
-      { player: "Steve Mounié", minute: 65, team: "Brest" },
-      { player: "Bradley Barcola", minute: 80, team: "PSG" }
+      { player: "Del Castillo", minute: 29, team: "Brest" },
+      { player: "Dembele", minute: 42, team: "PSG" },
+      { player: "Fabian Ruiz", minute: 73, team: "PSG" },
+      { player: "Dembele", minute: 74, team: "PSG" }
     ],
     lineup: {
       PSG: ["Donnarumma", "Hakimi", "Marquinhos", "Pacho", "Nuno Mendes", "Vitinha", "Zaïre-Emery", "Fabián Ruiz", "Dembélé", "Ramos", "Barcola"],
@@ -112,8 +112,8 @@ export const matchesInfo = [
     venue: "Stade Auguste-Delaune",
     status: "completed",
     goals: [
-      { player: "Gonçalo Ramos", minute: 30, team: "PSG" },
-      { player: "Junya Ito", minute: 75, team: "Reims" }
+      { player: "Nakamura", minute: 9, team: "Reims" },
+      { player: "Dembele", minute: 68, team: "PSG" }
     ],
     lineup: {
       PSG: ["Donnarumma", "Hakimi", "Marquinhos", "Pacho", "Nuno Mendes", "Vitinha", "João Neves", "Lee Kang-in", "Dembélé", "Ramos", "Barcola"],
@@ -133,10 +133,10 @@ export const matchesInfo = [
     venue: "Parc des Princes",
     status: "completed",
     goals: [
-      { player: "Bradley Barcola", minute: 25, team: "PSG" },
-      { player: "Lee Kang-in", minute: 50, team: "PSG" },
-      { player: "Arnaud Kalimuendo", minute: 70, team: "Rennes" },
-      { player: "Ousmane Dembélé", minute: 85, team: "PSG" }
+      { player: "Bradley Barcola", minute: 30, team: "PSG" },
+      { player: "Lee Kang-in", minute: 58, team: "PSG" },
+      { player: "Bradley Barcola", minute: 68, team: "PSG" },
+      { player: "Arnaud Kalimuendo", minute: 75, team: "Rennes" }
     ],
     lineup: {
       PSG: ["Donnarumma", "Hakimi", "Marquinhos", "Pacho", "Nuno Mendes", "Vitinha", "Zaïre-Emery", "Fabián Ruiz", "Dembélé", "Ramos", "Barcola"],
@@ -156,8 +156,8 @@ export const matchesInfo = [
     venue: "Allianz Riviera",
     status: "completed",
     goals: [
-      { player: "Evann Guessand", minute: 40, team: "Nice" },
-      { player: "Gonçalo Ramos", minute: 80, team: "PSG" }
+      { player: "Abdi", minute: 40, team: "Nice" },
+      { player: "Bombito(OG)", minute: 52, team: "PSG" }
     ],
     lineup: {
       PSG: ["Donnarumma", "Hakimi", "Pacho", "Beraldo", "Nuno Mendes", "Vitinha", "João Neves", "Lee Kang-in", "Dembélé", "Ramos", "Asensio"],
@@ -177,12 +177,12 @@ export const matchesInfo = [
     venue: "Parc des Princes",
     status: "completed",
     goals: [
-      { player: "Ousmane Dembélé", minute: 10, team: "PSG" },
-      { player: "Bradley Barcola", minute: 35, team: "PSG" },
-      { player: "Habib Diarra", minute: 50, team: "Strasbourg" },
-      { player: "Gonçalo Ramos", minute: 70, team: "PSG" },
-      { player: "Emanuel Emegha", minute: 80, team: "Strasbourg" },
-      { player: "Marco Asensio", minute: 88, team: "PSG" }
+      { player: "Mayulu", minute: 18, team: "PSG" },
+      { player: "Marco Asensio", minute: 47, team: "PSG" },
+      { player: "Mara", minute: 58, team: "Strasbourg" },
+      { player: "Bradley Barcola", minute: 66, team: "PSG" },
+      { player: "Lee Kang-in", minute: 90, team: "PSG" },
+      { player: "Diong", minute: 90+2, team: "Strasbourg" }
     ],
     lineup: {
       PSG: ["Donnarumma", "Hakimi", "Marquinhos", "Pacho", "Nuno Mendes", "Vitinha", "Zaïre-Emery", "Fabián Ruiz", "Dembélé", "Ramos", "Barcola"],
@@ -202,9 +202,9 @@ export const matchesInfo = [
     venue: "Stade Vélodrome",
     status: "completed",
     goals: [
-      { player: "Gonçalo Ramos", minute: 20, team: "PSG" },
-      { player: "Bradley Barcola", minute: 55, team: "PSG" },
-      { player: "Ousmane Dembélé", minute: 75, team: "PSG" }
+      { player: "Joao Neves", minute: 7, team: "PSG" },
+      { player: "Balerdi(OG)", minute: 29, team: "PSG" },
+      { player: "Bradley Barcola", minute: 40, team: "PSG" }
     ],
     lineup: {
       PSG: ["Donnarumma", "Hakimi", "Marquinhos", "Pacho", "Nuno Mendes", "Vitinha", "Zaïre-Emery", "Fabián Ruiz", "Dembélé", "Ramos", "Barcola"],
@@ -224,7 +224,7 @@ export const matchesInfo = [
     venue: "Parc des Princes",
     status: "completed",
     goals: [
-      { player: "Vitinha", minute: 60, team: "PSG" }
+      { player: "Dembele", minute: 4, team: "PSG" }
     ],
     lineup: {
       PSG: ["Donnarumma", "Hakimi", "Marquinhos", "Pacho", "Nuno Mendes", "Vitinha", "João Neves", "Lee Kang-in", "Dembélé", "Ramos", "Barcola"],
@@ -240,16 +240,17 @@ export const matchesInfo = [
     homeTeamImage: teams.angers,
     awayTeam: "PSG",
     awayTeamImage: teams.psg,
-    score: "2-4",
-    venue: "Stade Raymond Kopa",
+    goals : [   { player: "", minute: 65, team: "PSG" }],
+      score:"2-4",
+   venue: "Stade Raymond Kopa",
     status: "completed",
     goals: [
-      { player: "Gonçalo Ramos", minute: 15, team: "PSG" },
-      { player: "Himad Abdelli", minute: 30, team: "Angers" },
-      { player: "Bradley Barcola", minute: 50, team: "PSG" },
-      { player: "Ousmane Dembélé", minute: 65, team: "PSG" },
-      { player: "Jean-Eudes Aholou", minute: 80, team: "Angers" },
-      { player: "Marco Asensio", minute: 85, team: "PSG" }
+      { player: "Lee Kang-in", minute: 17, team: "PSG" },
+      { player: "Lee Kang-in", minute: 20, team: "PSG" },
+      { player: "Bradley Barcola", minute: 31, team: "PSG" },
+      { player: "Bradley Barcola", minute: 45+2, team: "PSG" },
+      { player: "Lepaul", minute: 90+1, team: "Angers" },
+      { player: "Biumla", minute: 90+7, team: "Angers" }
     ],
     lineup: {
       PSG: ["Donnarumma", "Hakimi", "Pacho", "Beraldo", "Nuno Mendes", "Vitinha", "Zaïre-Emery", "Fabián Ruiz", "Dembélé", "Ramos", "Barcola"],
@@ -269,9 +270,9 @@ export const matchesInfo = [
     venue: "Parc des Princes",
     status: "completed",
     goals: [
-      { player: "Ousmane Dembélé", minute: 25, team: "PSG" },
-      { player: "Gonçalo Ramos", minute: 60, team: "PSG" },
-      { player: "Bradley Barcola", minute: 80, team: "PSG" }
+      { player: "Joao Neves", minute: 35, team: "PSG" },
+      { player: "Beraldo", minute: 84, team: "PSG" },
+      { player: "Vitinha", minute: 90+1, team: "PSG" }
     ],
     lineup: {
       PSG: ["Donnarumma", "Hakimi", "Marquinhos", "Pacho", "Nuno Mendes", "Vitinha", "Zaïre-Emery", "Fabián Ruiz", "Dembélé", "Ramos", "Barcola"],
@@ -291,8 +292,8 @@ export const matchesInfo = [
     venue: "Parc des Princes",
     status: "completed",
     goals: [
-      { player: "Gonçalo Ramos", minute: 40, team: "PSG" },
-      { player: "Moses Simon", minute: 75, team: "Nantes" }
+      { player: "Hakimi", minute: 2, team: "PSG" },
+      { player: "Abline", minute: 38, team: "Nantes" }
     ],
     lineup: {
       PSG: ["Donnarumma", "Hakimi", "Pacho", "Beraldo", "Nuno Mendes", "Vitinha", "João Neves", "Lee Kang-in", "Dembélé", "Ramos", "Asensio"],
