@@ -2,17 +2,11 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const router = express.Router();
 
-// Load environment variables only in development
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-// Optional: Debug (remove or comment out in production)
-console.log('Loaded environment variables:', {
-  USERNAME: process.env.USERNAME,
-  PASSWORD: process.env.PASSWORD,
-  JWT_SECRET: process.env.JWT_SECRET ? '✅ SET' : '❌ MISSING',
-});
+
 
 router.post('/login', async (req, res) => {
   try {

@@ -9,7 +9,6 @@ const { upload } = require('../middleware/upload');
 router.get('/', async (req, res) => {
   try {
     const news = await News.find();
-    // Map news items to include full image URL
     const newsWithFullUrl = news.map(item => ({
       ...item.toObject(),
       image: item.image ? `${req.protocol}://${req.get('host')}/${item.image}` : null

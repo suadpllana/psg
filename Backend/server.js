@@ -15,12 +15,13 @@ app.use('/news', newsRoutes);
 app.use('/auth', authRoutes);
 
 mongoose
-  .connect('mongodb://localhost:27017/news')
+  .connect(process.env.MONGO_URI)
   .then(() => console.log('Connected to MongoDB'))
   .catch((err) => {
     console.error('MongoDB connection error:', err.message);
     process.exit(1);
   });
+;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
