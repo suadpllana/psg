@@ -1,0 +1,220 @@
+$primary-blue: #003087;
+$gray-200: #e5e7eb;
+$gray-600: #4b5563;
+$gray-700: #374151;
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+$light-gray: #f9fafb;
+
+@mixin transition($property) {
+  transition: $property 0.3s ease;
+}
+.season-selector {
+  margin: 15px 0;
+}
+
+.season-selector select {
+  padding: 8px 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background-color: #1a1a2e;
+  color: white;
+  font-size: 16px;
+}
+
+.stats-table {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+th, td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #2a2a3a;
+}
+
+th {
+  background-color: #1a1a2e;
+  color: #fff;
+  font-weight: 600;
+}
+
+tr:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.flag-icon {
+  margin-right: 8px;
+  vertical-align: middle;
+}
+// Stats Container
+.stats-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+// Stats Title
+.stats-title {
+  font-size: 36px;
+  margin-top: 4rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 32px;
+  color: $primary-blue;
+}
+
+// Stats Section
+.stats-section {
+  margin-bottom: 48px;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: 600;
+  color: $primary-blue;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+// Stats Table
+.stats-table {
+  overflow-x: auto;
+  border: 1px solid $gray-200;
+  border-radius: 8px;
+  box-shadow: $shadow-md;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    color: $gray-700;
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid $gray-200;
+    }
+
+    th {
+      background-color: $primary-blue;
+      color: #fff;
+      font-weight: 600;
+      text-align: center;
+    }
+
+    tr:nth-child(even) {
+      background-color: $light-gray;
+    }
+
+    tr:hover {
+      background-color: $gray-200;
+    }
+
+    .center-text {
+      text-align: center;
+    }
+  }
+}
+
+// Standings Filter
+.standings-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+  margin-bottom: 16px;
+
+  .filter-button {
+    background-color: #fff;
+    border: 1px solid $gray-200;
+    border-radius: 4px;
+    padding: 8px 16px;
+    font-size: 14px;
+    color: $gray-700;
+    cursor: pointer;
+    @include transition(all);
+
+    &:hover {
+      background-color: $primary-blue;
+      color: #fff;
+    }
+
+    &.active {
+      background-color: $primary-blue;
+      color: #fff;
+      border-color: $primary-blue;
+    }
+  }
+}
+
+// Legends Grid
+.legends-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+// Legend Card
+.legend-card {
+  background-color: #fff;
+  border: 1px solid $gray-200;
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: $shadow-md;
+  @include transition(box-shadow);
+
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+}
+
+.legend-header {
+  border-bottom: 1px solid $gray-200;
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.legend-name {
+  font-size: 20px;
+  font-weight: 600;
+  color: $primary-blue;
+}
+
+.legend-role {
+  font-size: 14px;
+  color: $gray-600;
+}
+
+.legend-details {
+  font-size: 14px;
+  color: $gray-700;
+
+  p {
+    margin-bottom: 8px;
+  }
+
+  strong {
+    font-weight: 500;
+    color: $primary-blue;
+  }
+
+  ul {
+    list-style: disc;
+    list-style-position: inside;
+    margin-bottom: 8px;
+  }
+}

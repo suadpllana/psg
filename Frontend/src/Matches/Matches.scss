@@ -1,0 +1,449 @@
+// Variables
+$primary-blue: #003087;
+$psg-red: #DA291C;
+$gray-100: #f3f4f6;
+$gray-200: #e5e7eb;
+$gray-300: #d1d5db;
+$gray-400: #9ca3af;
+$gray-600: #4b5563;
+$gray-700: #374151;
+$gray-900: #111827;
+$shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+$shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+$shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+$shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
+
+// Mixins
+@mixin transition($property) {
+  transition: $property 0.3s ease;
+}
+
+@mixin card-hover-effect {
+  transform: translateY(-3px);
+  box-shadow: $shadow-lg;
+}
+
+// Matches Container
+.matches-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+// Matches Title
+.matches-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: $primary-blue;
+  position: relative;
+  padding-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(90deg, $primary-blue, $psg-red);
+    border-radius: 2px;
+  }
+  
+  img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+  }
+}
+
+// Matches Filter
+.matches-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+
+  .filter-button {
+    background-color: white;
+    border: 1px solid $gray-300;
+    border-radius: 50px;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $gray-700;
+    cursor: pointer;
+    @include transition(all);
+    box-shadow: $shadow-sm;
+
+    &:hover {
+      background-color: $primary-blue;
+      color: white;
+      border-color: $primary-blue;
+    }
+
+    &.active {
+      background-color: $primary-blue;
+      color: white;
+      border-color: $primary-blue;
+      transform: scale(1.05);
+    }
+  }
+}
+
+// Search and Sort Container
+.matches-controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+// Matches Search
+.matches-search {
+  position: relative;
+  min-width: 300px;
+  
+  .search-input {
+    width: 100%;
+    padding: 0.75rem 1.25rem 0.75rem 2.5rem;
+    font-size: 0.9375rem;
+    color: $gray-900;
+    border: 1px solid $gray-300;
+    border-radius: 50px;
+    outline: none;
+    @include transition(all);
+    box-shadow: $shadow-sm;
+
+    &:focus {
+      border-color: $primary-blue;
+      box-shadow: 0 0 0 3px rgba($primary-blue, 0.1);
+    }
+
+    &::placeholder {
+      color: $gray-600;
+    }
+  }
+
+  &::before {
+    content: '🔍';
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0.6;
+  }
+}
+
+// Matches Sort
+.matches-sort {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: white;
+  border: 1px solid $gray-300;
+  border-radius: 50px;
+  padding: 0.25rem;
+  box-shadow: $shadow-sm;
+
+  .sort-button {
+    border: none;
+    border-radius: 50px;
+    padding: 0.5rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $gray-700;
+    cursor: pointer;
+    background: transparent;
+    @include transition(all);
+
+    &:hover {
+      color: $primary-blue;
+    }
+
+    &.active {
+      background-color: $primary-blue;
+      color: white;
+    }
+  }
+}
+
+// Matches Grid
+.matches-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+
+  @media (min-width: 640px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (min-width: 1024px) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.match-card {
+  background-color: white;
+  border: 1px solid $gray-200;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: $shadow-md;
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  @include transition(all);
+
+  &:hover {
+    @include card-hover-effect;
+  }
+}
+
+// Match Header
+.match-header {
+  padding: 1.25rem;
+  border-bottom: 1px solid $gray-200;
+  background: linear-gradient(to right, rgba($primary-blue, 0.1), rgba($psg-red, 0.1));
+}
+
+.match-score {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: $gray-900;
+  margin-bottom: 0.5rem;
+  
+  img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+  }
+}
+
+.match-competition {
+  text-align: center;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: $primary-blue;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.match-status {
+  text-align: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 50px;
+  display: inline-block;
+  margin: 0 auto;
+  
+  &.finished {
+    background-color: rgba($gray-600, 0.1);
+    color: $gray-700;
+  }
+  
+  &.upcoming {
+    background-color: rgba($psg-red, 0.1);
+    color: $psg-red;
+  }
+  
+  &.live {
+    background-color: rgba(#28a745, 0.1);
+    color: #28a745;
+    animation: pulse 1.5s infinite;
+  }
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.6; }
+  100% { opacity: 1; }
+}
+
+// Match Details
+.match-details {
+  padding: 1.25rem;
+  
+  .detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+    font-size: 0.875rem;
+    
+    &:last-child {
+      margin-bottom: 0;
+    }
+    
+    .detail-label {
+      font-weight: 500;
+      color: $gray-600;
+    }
+    
+    .detail-value {
+      font-weight: 600;
+      color: $gray-900;
+    }
+  }
+}
+
+.match-page {
+  .match-card {
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: $shadow-xl;
+    margin-top: 2rem !important;
+    .match-header {
+      padding: 2rem;
+    }
+    
+    .match-score {
+      font-size: 2rem;
+      
+      img {
+        width: 40px;
+        height: 40px;
+      }
+    }
+  }
+  
+  .match-sections {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    
+    @media (min-width: 768px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  .match-section {
+    background: white;
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    box-shadow: $shadow-md;
+    
+    h2 {
+      font-size: 1.25rem;
+      color: $primary-blue;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid $gray-200;
+    }
+  }
+  
+  .goals-list {
+    list-style: none;
+    padding: 0;
+    
+    li {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px dashed $gray-200;
+      
+      &:last-child {
+        border-bottom: none;
+      }
+      
+      .goal-info {
+        display: flex;
+        gap: 0.5rem;
+      }
+      
+      .goal-minute {
+        font-weight: 600;
+        color: $psg-red;
+      }
+      
+      .goal-type {
+        font-size: 0.75rem;
+        background: $gray-100;
+        padding: 0.125rem 0.375rem;
+        border-radius: 50px;
+        color: $gray-700;
+      }
+    }
+  }
+  
+  .lineup-grid {
+    display: grid;
+    gap: 1.5rem;
+    
+    @media (min-width: 640px) {
+      grid-template-columns: 1fr 1fr;
+    }
+    
+    .lineup-team {
+      h3 {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1rem;
+        color: $gray-900;
+        margin-bottom: 1rem;
+        
+        img {
+          width: 24px;
+          height: 24px;
+        }
+      }
+      
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        
+        li {
+          padding: 0.5rem 0;
+          border-bottom: 1px solid $gray-200;
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          
+          &:last-child {
+            border-bottom: none;
+          }
+          
+          &::before {
+            content: '•';
+            color: $primary-blue;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Empty State
+.matches-empty {
+  text-align: center;
+  padding: 3rem;
+  grid-column: 1 / -1;
+  
+  p {
+    font-size: 1.125rem;
+    color: $gray-600;
+    margin-bottom: 1rem;
+  }
+  
+  .empty-icon {
+    font-size: 3rem;
+    color: $gray-400;
+    margin-bottom: 1rem;
+  }
+}
