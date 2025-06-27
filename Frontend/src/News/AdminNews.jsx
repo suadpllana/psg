@@ -20,7 +20,7 @@ const AdminNews = () => {
 
   const fetchNews = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/news');
+      const response = await axios.get('https://psg-backend-a8ys.onrender.com/news');
       setNews(response.data);
       setError(null);
     } catch (err) {
@@ -46,7 +46,7 @@ const AdminNews = () => {
     formData.append('category', category);
 
     try {
-      await axios.post('http://localhost:5000/news', formData, {
+      await axios.post('https://psg-backend-a8ys.onrender.com/news', formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       await fetchNews();
@@ -80,7 +80,7 @@ const AdminNews = () => {
     formData.append('category', category);
 
     try {
-      await axios.put(`http://localhost:5000/news/${currentNewsId}`, formData, {
+      await axios.put(`https://psg-backend-a8ys.onrender.com/news/${currentNewsId}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       });
       await fetchNews();
@@ -112,7 +112,7 @@ const AdminNews = () => {
     }
 
     try {
-      await axios.delete(`http://localhost:5000/news/${id}`, {
+      await axios.delete(`https://psg-backend-a8ys.onrender.com/news/${id}`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       await fetchNews();

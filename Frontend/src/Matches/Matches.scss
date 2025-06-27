@@ -300,7 +300,12 @@ $shadow-xl: 0 20px 25px rgba(0, 0, 0, 0.1);
     }
   }
 }
-
+.go-back{
+  cursor: pointer;
+  position: absolute;
+  top: 50px;
+  font-size: 20px;
+}
 .match-page {
   .match-card {
     max-width: 800px;

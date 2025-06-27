@@ -5,7 +5,7 @@ import './Fun.scss';
 import ClubWorldCupPredictor from './ClubWorldCupPredictor';
 
 const Fun = () => {
-  const [difficulty, setDifficulty] = useState('easy'); // Default to easy
+  const [difficulty, setDifficulty] = useState('easy'); 
   const [questions, setQuestions] = useState(quizQuestions.easyQuestions);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState('');
@@ -14,7 +14,6 @@ const Fun = () => {
   const [isCorrect, setIsCorrect] = useState(false);
   const [quizCompleted, setQuizCompleted] = useState(false);
 
-  // Update questions when difficulty changes
   useEffect(() => {
     if (difficulty === 'easy') {
       setQuestions(quizQuestions.easyQuestions);
@@ -23,7 +22,6 @@ const Fun = () => {
     } else if (difficulty === 'hard') {
       setQuestions(quizQuestions.hardQuestions);
     }
-    // Reset quiz state when difficulty changes
     setCurrentQuestionIndex(0);
     setScore(0);
     setSelectedAnswer('');
@@ -98,98 +96,10 @@ const Fun = () => {
       <div className="fun-container">
         <h1 className="fun-title">PSG Fun Zone</h1>
 
-        <section className="fun-section">
-          <h2 className="section-title">PSG Trivia Quiz</h2>
-          <div className="difficulty-buttons">
-            <button
-              className={`difficulty-button ${difficulty === 'easy' ? 'active' : ''}`}
-              onClick={() => handleDifficultyChange('easy')}
-            >
-              Easy
-            </button>
-            <button
-              className={`difficulty-button ${difficulty === 'intermediate' ? 'active' : ''}`}
-              onClick={() => handleDifficultyChange('intermediate')}
-            >
-              Intermediate
-            </button>
-            <button
-              className={`difficulty-button ${difficulty === 'hard' ? 'active' : ''}`}
-              onClick={() => handleDifficultyChange('hard')}
-            >
-              Hard
-            </button>
-          </div>
-          {quizCompleted ? (
-            <div className="quiz-completed">
-              <h3>Quiz Completed!</h3>
-              <p>Your Score: {score} / {questions.length}</p>
-              <p>
-                {score >= 8
-                  ? "Fantastic! You're a PSG legend!"
-                  : score >= 5
-                  ? "Great job, PSG fan!"
-                  : "Keep practicing, young star!"}
-              </p>
-              <button className="quiz-button" onClick={resetQuiz}>
-                Try Again
-              </button>
-            </div>
-          ) : (
-            <div className="quiz-container">
-              <h3 className="question-title">
-                Question {currentQuestionIndex + 1}: {currentQuestion.question}
-              </h3>
-              <div className="quiz-options">
-                {currentQuestion.options.map((option, index) => {
-                  const isCorrectOption = option === currentQuestion.correctAnswer;
-                  const isSelectedOption = option === selectedAnswer;
-                  let optionClass = '';
+     
 
-                  if (showFeedback) {
-                    if (isCorrectOption) {
-                      optionClass = 'correct';
-                    } else if (isSelectedOption && !isCorrect) {
-                      optionClass = 'incorrect';
-                    }
-                  }
-
-                  return (
-                    <label key={index} className={`quiz-option ${optionClass}`}>
-                      <input
-                        type="radio"
-                        name="answer"
-                        value={option}
-                        checked={isSelectedOption}
-                        onChange={(e) => setSelectedAnswer(e.target.value)}
-                        disabled={showFeedback}
-                      />
-                      {option}
-                    </label>
-                  );
-                })}
-              </div>
-              {showFeedback && (
-                <p className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
-                  {isCorrect
-                    ? 'Correct!'
-                    : `Incorrect. The correct answer is: ${currentQuestion.correctAnswer}`}
-                </p>
-              )}
-              <button
-                className={`quiz-button`}
-                onClick={showFeedback ? handleNextQuestion : handleAnswerSubmit}
-                disabled={!selectedAnswer && !showFeedback}
-              >
-                {showFeedback ? 'Next Question' : 'Submit Answer'}
-              </button>
-              <p>Question {currentQuestionIndex + 1} / {questions.length}</p>
-            </div>
-          )}
-        </section>
-
-        <section className="fun-section">
-          <h2 className="section-title">PSG Lineup Builder</h2>
+        <section className="fun-section lineupSection">
+          <h2  className="section-title lineup">PSG Lineup Builder</h2>
           <div className="formation-selector">
             <label htmlFor="formation">Formation: </label>
             <select id="formation" value={formation} onChange={handleFormationChange}>
@@ -281,6 +191,97 @@ const Fun = () => {
         )}
       </div>
       <ClubWorldCupPredictor />
+
+
+         <section className="fun-section">
+          <h2 className="section-title">PSG Trivia Quiz</h2>
+          <div className="difficulty-buttons">
+            <button
+              className={`difficulty-button ${difficulty === 'easy' ? 'active' : ''}`}
+              onClick={() => handleDifficultyChange('easy')}
+            >
+              Easy
+            </button>
+            <button
+              className={`difficulty-button ${difficulty === 'intermediate' ? 'active' : ''}`}
+              onClick={() => handleDifficultyChange('intermediate')}
+            >
+              Intermediate
+            </button>
+            <button
+              className={`difficulty-button ${difficulty === 'hard' ? 'active' : ''}`}
+              onClick={() => handleDifficultyChange('hard')}
+            >
+              Hard
+            </button>
+          </div>
+          {quizCompleted ? (
+            <div className="quiz-completed">
+              <h3>Quiz Completed!</h3>
+              <p>Your Score: {score} / {questions.length}</p>
+              <p>
+                {score >= 8
+                  ? "Fantastic! You're a PSG legend!"
+                  : score >= 5
+                  ? "Great job, PSG fan!"
+                  : "Keep practicing, young star!"}
+              </p>
+              <button className="quiz-button" onClick={resetQuiz}>
+                Try Again
+              </button>
+            </div>
+          ) : (
+            <div className="quiz-container">
+              <h3 className="question-title">
+                Question {currentQuestionIndex + 1}: {currentQuestion.question}
+              </h3>
+              <div className="quiz-options">
+                {currentQuestion.options.map((option, index) => {
+                  const isCorrectOption = option === currentQuestion.correctAnswer;
+                  const isSelectedOption = option === selectedAnswer;
+                  let optionClass = '';
+
+                  if (showFeedback) {
+                    if (isCorrectOption) {
+                      optionClass = 'correct';
+                    } else if (isSelectedOption && !isCorrect) {
+                      optionClass = 'incorrect';
+                    }
+                  }
+
+                  return (
+                    <label key={index} className={`quiz-option ${optionClass}`}>
+                      <input
+                        type="radio"
+                        name="answer"
+                        value={option}
+                        checked={isSelectedOption}
+                        onChange={(e) => setSelectedAnswer(e.target.value)}
+                        disabled={showFeedback}
+                      />
+                      {option}
+                    </label>
+                  );
+                })}
+              </div>
+              {showFeedback && (
+                <p className={`feedback ${isCorrect ? 'correct' : 'incorrect'}`}>
+                  {isCorrect
+                    ? 'Correct!'
+                    : `Incorrect. The correct answer is: ${currentQuestion.correctAnswer}`}
+                </p>
+              )}
+              <button
+                className={`quiz-button`}
+                onClick={showFeedback ? handleNextQuestion : handleAnswerSubmit}
+                disabled={!selectedAnswer && !showFeedback}
+              >
+                {showFeedback ? 'Next Question' : 'Submit Answer'}
+              </button>
+              <p>Question {currentQuestionIndex + 1} / {questions.length}</p>
+            </div>
+          )}
+        </section>
     </>
   );
 };

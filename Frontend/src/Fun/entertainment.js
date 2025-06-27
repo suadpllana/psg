@@ -243,14 +243,14 @@ export const quizQuestions = {
 
 export const formations = {
   '4-3-3': [
-    { id: 0, role: 'gk', x: 50, y: 92 }, // Goalkeeper
-    { id: 1, role: 'def', x: 25, y: 60 }, // Left Back
-    { id: 2, role: 'def', x: 40, y: 62 }, // Center Back
-    { id: 3, role: 'def', x: 60, y: 62 }, // Center Back
-    { id: 4, role: 'def', x: 75, y: 60 }, // Right Back
-    { id: 5, role: 'mid', x: 35, y: 42 }, // Central Midfielder
-    { id: 6, role: 'mid', x: 50, y: 42 }, // Central Midfielder
-    { id: 7, role: 'mid', x: 65, y: 42 }, // Central Midfielder
+    { id: 0, role: 'gk', x: 50, y: 85 }, // Goalkeeper
+    { id: 1, role: 'def', x: 25, y: 65 }, // Left Back
+    { id: 2, role: 'def', x: 40, y: 67 }, // Center Back
+    { id: 3, role: 'def', x: 60, y: 67 }, // Center Back
+    { id: 4, role: 'def', x: 75, y: 65 }, // Right Back
+    { id: 5, role: 'mid', x: 35, y: 40 }, // Central Midfielder
+    { id: 6, role: 'mid', x: 50, y: 40 }, // Central Midfielder
+    { id: 7, role: 'mid', x: 65, y: 40 }, // Central Midfielder
     { id: 8, role: 'fwd', x: 35, y: 15 }, // Left Winger
     { id: 9, role: 'fwd', x: 65, y: 15 }, // Right Winger
     { id: 10, role: 'fwd', x: 50, y: 15 } // Striker

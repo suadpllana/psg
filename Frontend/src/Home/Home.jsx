@@ -13,7 +13,7 @@ const Home = () => {
 
    useEffect(() => {
     axios
-      .get('http://localhost:5000/news')
+      .get('https://psg-backend-a8ys.onrender.com/news')
       .then((res) => setNews(res.data))
       .catch((err) => {
         console.error('Error fetching news:', err);
@@ -83,9 +83,8 @@ const Home = () => {
         <div className="news-list">
           {latestNews.map((news, index) => (
             <div onClick={() => navigate(`/psg/news/${news._id}`)} key={index} className="news-item">
-              <img style={{width: "50%"}} src={news.image} alt="" />
+              <img style={{width: "60%", height: "60%"}} src={news.image} alt="" />
               <h3 className="news-title">{news.title}</h3>
-              <p className="news-date">{news.date}</p>
               <p className="news-summary">{news.summary}</p>
             </div>
           ))}

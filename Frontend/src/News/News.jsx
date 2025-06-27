@@ -2,27 +2,25 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import './News.scss';
 import { useNavigate } from 'react-router-dom';
+
 const News = () => {
   const [news, setNews] = useState([]);
   const [selectedType, setSelectedType] = useState('All');
   const [searchQuery, setSearchQuery] = useState('');
   const [error, setError] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const newsPerPage = 9;
   const navigate = useNavigate();
 
-
-  
   useEffect(() => {
     axios
-      .get('http://localhost:5000/news')
+      .get('https://psg-backend-a8ys.onrender.com/news')
       .then((res) => setNews(res.data))
       .catch((err) => {
         console.error('Error fetching news:', err);
         setError('Failed to load news.');
       });
-
-      
   }, []);
-
 
   const newsTypes = ['All', 'Transfers', 'Interviews', 'Club News'];
 
@@ -34,6 +32,19 @@ const News = () => {
         news.description.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
+  // Pagination logic
+  const indexOfLastNews = currentPage * newsPerPage;
+  const indexOfFirstNews = indexOfLastNews - newsPerPage;
+  const currentNews = filteredNews.slice(indexOfFirstNews, indexOfLastNews);
+  const totalPages = Math.ceil(filteredNews.length / newsPerPage);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedType, searchQuery]);
 
   return (
     <div className="news-container">
@@ -60,11 +71,12 @@ const News = () => {
       </div>
       {error && <p className="news-not-found">{error}</p>}
       <div className="news-grid">
-        {filteredNews.map((news) => (
-          <div onClick={() => navigate(`/psg/news/${news._id}`)}  key={news._id} className="news-card">
-            <div  className="news-header">
+        {currentNews.map((news) => (
+          <div onClick={() => navigate(`/psg/news/${news._id}`)} key={news._id} className="news-card">
+            <div className="news-header">
               <img src={news.image} alt={news.title} className="news-image" />
               <span
+                style={{backgroundColor: "green"}}
                 className={`news-category ${news.category
                   .toLowerCase()
                   .replace(' ', '-')}`}
@@ -84,13 +96,44 @@ const News = () => {
               <p className="news-excerpt">
                 {news.description.substring(0, 100)}...
               </p>
-              <button  className="read-more">Read More</button>
+              <button className="read-more">Read More</button>
             </div>
           </div>
         ))}
       </div>
       {filteredNews.length === 0 && !error && (
         <div className="news-not-found">No news found matching your criteria</div>
+      )}
+      
+      {/* Pagination controls */}
+      {filteredNews.length > newsPerPage && (
+        <div className="pagination">
+          <button 
+            onClick={() => paginate(currentPage - 1)} 
+            disabled={currentPage === 1}
+            className="pagination-button"
+          >
+            Previous
+          </button>
+          
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(number => (
+            <button
+              key={number}
+              onClick={() => paginate(number)}
+              className={`pagination-button ${currentPage === number ? 'active' : ''}`}
+            >
+              {number}
+            </button>
+          ))}
+          
+          <button 
+            onClick={() => paginate(currentPage + 1)} 
+            disabled={currentPage === totalPages}
+            className="pagination-button"
+          >
+            Next
+          </button>
+        </div>
       )}
     </div>
   );

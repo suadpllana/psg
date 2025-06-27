@@ -3,11 +3,12 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { matchesInfo } from './matchesInfo';
 import './Matches.scss';
+import { useNavigate } from 'react-router-dom';
 
 const Match = () => {
   const { id } = useParams();
   const match = matchesInfo.find((m) => m.id === parseInt(id));
-
+  const navigate = useNavigate()
   if (!match) {
     return (
       <div className="matches-container">
@@ -24,6 +25,7 @@ const Match = () => {
 
   return (
     <div className="matches-container match-page">
+      <p onClick={() => navigate(-1)} className="go-back">Go back</p>
       <div className="match-card">
         <div className="match-header">
           <div className="match-score">

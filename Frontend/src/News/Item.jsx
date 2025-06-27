@@ -7,12 +7,12 @@ const Item = () => {
   const { id } = useParams();
   const [news, setNews] = useState(null);
   const [error, setError] = useState(null);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchNewsItem = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/news/${id}`);
+        const response = await axios.get(`https://psg-backend-a8ys.onrender.com/news/${id}`);
         setNews(response.data);
         setError(null);
       } catch (err) {
@@ -26,51 +26,87 @@ const Item = () => {
 
   if (error) {
     return (
-      <div className="news-container">
-        <div className="news-not-found">{error}</div>
+      <div className="news-item-error-container">
+        <div className="news-item-error-content">
+          <h2 className="news-item-error-title">Oops!</h2>
+          <p className="news-item-error-message">{error}</p>
+          <button 
+            className="news-item-error-button"
+            onClick={() => window.location.reload()}
+          >
+            Retry
+          </button>
+        </div>
       </div>
     );
   }
 
   if (!news) {
     return (
-      <div className="news-container">
-        <div className="news-not-found">Loading...</div>
+      <div className="news-item-loading-container">
+        <div className="news-item-loading-spinner"></div>
+        <p className="news-item-loading-text">Loading Article...</p>
       </div>
     );
   }
 
   return (
-    <div className="news-container">
-      <h2 onClick={() => navigate(-1)} className="go-back">Go back</h2>
-      <div className="news-hero">
-        <img src={news.image} alt={news.title} className="news-hero-image" />
-        <div className="news-hero-overlay">
-          <span className="news-category">{news.category || 'Other'}</span>
-          <h1 className="news-title">{news.title}</h1>
-          <p className="news-date">{new Date(news.createdAt || Date.now()).toLocaleDateString('en-US', {
-            year: 'numeric',
-            month: 'long',
-            day: 'numeric'
-          })}</p>
+    <div className="news-item-container">
+      <div className="news-item-hero">
+        <div className="news-item-hero-backdrop">
+          <img 
+            src={news.image} 
+            alt={news.title} 
+            className="news-item-hero-image" 
+            loading="lazy"
+          />
+          <div  className="news-item-hero-gradient"></div>
+        </div>
+        <div className="news-item-hero-content">
+          <div className="news-item-meta">
+            <span className="news-item-date-badge">
+              {new Date(news.createdAt || Date.now()).toLocaleDateString('en-US', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric'
+              })}
+            </span>
+          </div>
+          <h1 className="news-item-title">{news.title}</h1>
+        
         </div>
       </div>
-      <div className="news-content">
-        <div className="news-card">
-          <div className="news-details">
-            <p>{news.description}</p>
-            {news.extendedContent && (
-              <>
-                <p>{news.extendedContent}</p>
-                {news.quotes && (
-                  <div className="news-quote">
-                    <blockquote>"{news.quotes}"</blockquote>
-                  </div>
-                )}
-              </>
-            )}
-          </div>
-        </div>
+
+      <div className="news-item-body">
+        <article className="news-item-article">
+          <p className="news-item-lead">{news.description}</p>
+          
+          {news.extendedContent && (
+            <>
+              <p className="news-item-paragraph">{news.extendedContent}</p>
+              
+              {news.quotes && (
+                <div className="news-item-quote-container">
+                  <div className="news-item-quote-mark">"</div>
+                  <blockquote className="news-item-quote">{news.quotes}</blockquote>
+                </div>
+              )}
+            </>
+          )}
+
+         
+        </article>
+
+      
+      </div>
+
+      <div className="news-item-footer">
+        <button 
+          className="news-item-back-button"
+          onClick={() => navigate(-1)}
+        >
+          ← Back to News
+        </button>
       </div>
     </div>
   );

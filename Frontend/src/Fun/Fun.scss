@@ -50,6 +50,7 @@
   max-width: 700px;
   height: 700px;
   margin: 0 auto;
+
 }
 
 .field {
@@ -58,6 +59,7 @@
   height: 650px;
   padding-top: 60%; 
   background-color: #2e7d32; 
+  
 }
 
 .player-position {
@@ -87,8 +89,13 @@
   border-radius: 20%;
   display: flex;
   flex-direction: column;
-  width: 70px;
-  height: 70px;
+    align-items: center;
+    justify-content: center;
+  width: 75px;
+  height: 75px;
+  img{
+    width: 50px;
+  }
 }
 
 .modal {
@@ -155,9 +162,12 @@
 
 
 
+
+
 .formation-selector {
   margin-bottom: 20px;
   text-align: center;
+ 
 }
 
 .formation-selector label {
@@ -315,7 +325,6 @@
   margin: 0 auto 1rem;
 
   &:hover {
-    background-color: darken(#003087, 8%);
     transform: translateY(-1px);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   }
@@ -372,3 +381,9 @@
     }
   }
 }
+
+@media(max-width: 767px) {
+    .lineupSection{
+    display: none;
+}
+  }

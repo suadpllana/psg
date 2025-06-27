@@ -19,7 +19,7 @@ const Squad = () => {
 
   return (
     <div className="squad">
-      <h1 style={{color: "white", marginTop: "2rem"}}>PSG Squad 2024-25</h1>
+      <h1 style={{color: "black", marginTop: "2rem"}}>PSG Squad 2024-25</h1>
       <div className="filter-buttons">
         {positions.map(position => (
           <button
@@ -40,8 +40,8 @@ const Squad = () => {
           >
             {player.image && <img src={player.image} />}
             <h3>{player.name}</h3>
-            <p>#{player.number}</p>
-            <p>{player.position}</p>
+            <p style={{color: "black"}}>#{player.number}</p>
+            <p style={{color: "black"}} >{player.position.slice(0, -1)}</p>
           </div>
         ))}
       </div>

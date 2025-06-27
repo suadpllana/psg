@@ -1,4 +1,3 @@
-// MatchesList.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { matchesInfo } from './matchesInfo';
@@ -47,8 +46,8 @@ const Matches = () => {
     <div className="matches-container">
       <h1 className="matches-title">
         PSG 2024-25 Matches 
-      
       </h1>
+        <span style={{marginBottom: "30px"}}>{matchesInfo.length} matches  </span>
       
       <div className="matches-filter">
         {competitions.map(comp => (
