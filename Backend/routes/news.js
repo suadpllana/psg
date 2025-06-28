@@ -55,6 +55,17 @@ router.get('/', async (req, res) => {
   }
 });
 
+router.get('/:id', async (req, res) => {
+  try {
+    const news = await News.findById(req.params.id);
+    if (!news) return res.status(404).json({ message: 'News not found' });
+    res.json(news);
+  } catch (err) {
+    console.error('GET /news/:id - Error:', err.message);
+    res.status(500).json({ message: err.message });
+  }
+});
+
 router.post('/', auth, upload.single('image'), handleMulterError, async (req, res) => {
   console.log('POST /news - Request body:', req.body);
   console.log('POST /news - File received:', req.file);

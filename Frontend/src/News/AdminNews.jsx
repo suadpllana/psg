@@ -210,6 +210,7 @@ const AdminNews = () => {
         {news.map((n) => (
           <div key={n._id} className="news-item">
             <div className="news-details">
+              <img style={{width: "50px"}}src={n.image} alt="" />
               <h2 className="news-title">{n.title}</h2>
               <p className="news-category">{n.category}</p>
             </div>

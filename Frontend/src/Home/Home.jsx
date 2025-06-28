@@ -26,7 +26,8 @@ const Home = () => {
       });
   }, []);
 
-  const recentMatches = matchesInfo.slice(-8);
+const recentMatches = matchesInfo.sort((a, b) => new Date(a.date) - new Date(b.date)).slice(-8);
+console.log(recentMatches)
   const latestNews = news.slice(0, 5);
   const matchesPerPage = 4;
   const totalPages = Math.ceil(recentMatches.length / matchesPerPage);
