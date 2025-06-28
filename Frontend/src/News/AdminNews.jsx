@@ -21,7 +21,10 @@ const AdminNews = () => {
   const fetchNews = async () => {
     try {
       const response = await axios.get('https://psg-backend-a8ys.onrender.com/news');
-      setNews(response.data);
+      const sortedNews = response.data.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+      setNews(sortedNews);
       setError(null);
     } catch (err) {
       console.error('Error fetching news:', err.response ? err.response.data : err.message);
@@ -37,7 +40,6 @@ const AdminNews = () => {
       return;
     }
 
-    console.log('Adding news with token:', token); // Debug token
 
     const formData = new FormData();
     formData.append('title', title);

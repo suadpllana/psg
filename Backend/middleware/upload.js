@@ -1,46 +1,22 @@
-const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
+require('dotenv').config();
 
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    const uploadPath = path.join(__dirname, '../Uploads');
-    console.log('Multer - Resolved upload directory:', uploadPath);
-    if (!fs.existsSync(uploadPath)) {
-      try {
-        fs.mkdirSync(uploadPath, { recursive: true });
-        console.log('Multer - Created upload directory:', uploadPath);
-      } catch (err) {
-        console.error('Multer - Failed to create upload directory:', err.message);
-        return cb(err);
-      }
-    }
-    cb(null, uploadPath);
-  },
-  filename: (req, file, cb) => {
-    const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
-    const filename = uniqueSuffix + path.extname(file.originalname);
-    console.log('Multer - Saving file as:', filename);
-    cb(null, filename);
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
+const storage = new CloudinaryStorage({
+  cloudinary: cloudinary,
+  params: {
+    folder: "Uploads", // Ensure this is exactly "Uploads" (case-sensitive)
+    allowed_formats: ["jpg", "jpeg", "png", "gif"],
+    public_id: (req, file) => `${Date.now()}-${Math.round(Math.random() * 1e9)}-${file.originalname.split(".")[0]}`,
   },
 });
 
-const fileFilter = (req, file, cb) => {
-  const allowedTypes = /jpeg|jpg|png|gif/;
-  const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-  const mimetype = allowedTypes.test(file.mimetype);
-  console.log('Multer - File check - Original name:', file.originalname, 'MIME type:', file.mimetype);
-  if (extname && mimetype) {
-    cb(null, true);
-  } else {
-    cb(new Error('Only images are allowed (jpeg, jpg, png, gif)'));
-  }
-};
-
-const upload = multer({
-  storage: storage,
-  limits: { fileSize: 5 * 1024 * 1024 },
-  fileFilter: fileFilter,
-});
+const upload = multer({ storage, limits: { fileSize: 5 * 1024 * 1024 } });
 
 module.exports = { upload };

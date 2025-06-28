@@ -1,12 +1,13 @@
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import './News.scss';
-import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import axios from "axios";
+import placeholder from "../../public/images/placeholder.png";
+import "./News.scss";
+import { useNavigate } from "react-router-dom";
 
 const News = () => {
   const [news, setNews] = useState([]);
-  const [selectedType, setSelectedType] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedType, setSelectedType] = useState("All");
+  const [searchQuery, setSearchQuery] = useState("");
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const newsPerPage = 9;
@@ -14,34 +15,36 @@ const News = () => {
 
   useEffect(() => {
     axios
-      .get('https://psg-backend-a8ys.onrender.com/news')
-      .then((res) => setNews(res.data))
+      .get("https://psg-backend-a8ys.onrender.com/news")
+      .then((res) => {
+        const sortedNews = res.data.sort(
+          (a, b) => new Date(b.date) - new Date(a.date)
+        );
+        setNews(sortedNews);
+      })
       .catch((err) => {
-        console.error('Error fetching news:', err);
-        setError('Failed to load news.');
+        console.error("Error fetching news:", err);
+        setError("Failed to load news.");
       });
   }, []);
 
-  const newsTypes = ['All', 'Transfers', 'Interviews', 'Club News'];
+  const newsTypes = ["All", "Transfers", "Interviews", "Club News"];
 
   const filteredNews = news
-    .filter((news) => selectedType === 'All' || news.category === selectedType)
+    .filter((news) => selectedType === "All" || news.category === selectedType)
     .filter(
       (news) =>
         news.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
         news.description.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
-  // Pagination logic
   const indexOfLastNews = currentPage * newsPerPage;
   const indexOfFirstNews = indexOfLastNews - newsPerPage;
   const currentNews = filteredNews.slice(indexOfFirstNews, indexOfLastNews);
   const totalPages = Math.ceil(filteredNews.length / newsPerPage);
 
-  // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
-  // Reset to first page when filters change
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedType, searchQuery]);
@@ -53,7 +56,7 @@ const News = () => {
         {newsTypes.map((type) => (
           <button
             key={type}
-            className={`filter-button ${selectedType === type ? 'active' : ''}`}
+            className={`filter-button ${selectedType === type ? "active" : ""}`}
             onClick={() => setSelectedType(type)}
           >
             {type}
@@ -72,14 +75,26 @@ const News = () => {
       {error && <p className="news-not-found">{error}</p>}
       <div className="news-grid">
         {currentNews.map((news) => (
-          <div onClick={() => navigate(`/psg/news/${news._id}`)} key={news._id} className="news-card">
+          <div
+            onClick={() => navigate(`/psg/news/${news._id}`)}
+            key={news._id}
+            className="news-card"
+          >
             <div className="news-header">
-              <img src={news.image} alt={news.title} className="news-image" />
+              <img
+                src={news.image}
+                onError={(e) => {
+                  e.target.onerror = null;
+                  e.target.src = placeholder;
+                }}
+                alt={news.title}
+                className="news-image"
+              />
               <span
-                style={{backgroundColor: "green"}}
+                style={{ backgroundColor: "green" }}
                 className={`news-category ${news.category
                   .toLowerCase()
-                  .replace(' ', '-')}`}
+                  .replace(" ", "-")}`}
               >
                 {news.category}
               </span>
@@ -87,10 +102,10 @@ const News = () => {
             <div>
               <h2 className="news-title-text">{news.title}</h2>
               <p className="news-date">
-                {new Date(news.date).toLocaleDateString('en-US', {
-                  year: 'numeric',
-                  month: 'short',
-                  day: 'numeric',
+                {new Date(news.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "short",
+                  day: "numeric",
                 })}
               </p>
               <p className="news-excerpt">
@@ -102,32 +117,35 @@ const News = () => {
         ))}
       </div>
       {filteredNews.length === 0 && !error && (
-        <div className="news-not-found">No news found matching your criteria</div>
+        <div className="news-not-found">
+          No news found matching your criteria
+        </div>
       )}
-      
-      {/* Pagination controls */}
+
       {filteredNews.length > newsPerPage && (
         <div className="pagination">
-          <button 
-            onClick={() => paginate(currentPage - 1)} 
+          <button
+            onClick={() => paginate(currentPage - 1)}
             disabled={currentPage === 1}
             className="pagination-button"
           >
             Previous
           </button>
-          
-          {Array.from({ length: totalPages }, (_, i) => i + 1).map(number => (
+
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map((number) => (
             <button
               key={number}
               onClick={() => paginate(number)}
-              className={`pagination-button ${currentPage === number ? 'active' : ''}`}
+              className={`pagination-button ${
+                currentPage === number ? "active" : ""
+              }`}
             >
               {number}
             </button>
           ))}
-          
-          <button 
-            onClick={() => paginate(currentPage + 1)} 
+
+          <button
+            onClick={() => paginate(currentPage + 1)}
             disabled={currentPage === totalPages}
             className="pagination-button"
           >
