@@ -6,6 +6,9 @@ const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
 require('dotenv').config();
 
+
+
+
 cloudinary.config({
   cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
   api_key: process.env.CLOUDINARY_API_KEY,
@@ -42,6 +45,16 @@ const handleMulterError = (err, req, res, next) => {
   next();
 };
 
+router.get('/', async (req, res) => {
+  try {
+    const news = await News.find();
+    res.json(news);
+  } catch (err) {
+    console.error('GET /news - Error:', err.message);
+    res.status(500).json({ message: err.message });
+  }
+});
+
 router.post('/', auth, upload.single('image'), handleMulterError, async (req, res) => {
   console.log('POST /news - Request body:', req.body);
   console.log('POST /news - File received:', req.file);
@@ -51,7 +64,6 @@ router.post('/', auth, upload.single('image'), handleMulterError, async (req, re
       return res.status(400).json({ message: 'No image file uploaded' });
     }
 
-    // Upload to Cloudinary with explicit folder
     const result = await uploadToCloudinary(req.file);
     console.log('POST /news - Cloudinary upload result:', result);
 

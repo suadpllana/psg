@@ -15,7 +15,7 @@ const News = () => {
 
   useEffect(() => {
     axios
-      .get("https://psg-backend-a8ys.onrender.com/news")
+      .get("https://psg-backend-hvny.onrender.com/news")
       .then((res) => {
         const sortedNews = res.data.sort(
           (a, b) => new Date(b.date) - new Date(a.date)

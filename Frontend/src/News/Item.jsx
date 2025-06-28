@@ -13,7 +13,7 @@ const Item = () => {
     const fetchNewsItem = async () => {
       try {
         const response = await axios.get(
-          `https://psg-backend-a8ys.onrender.com/news/${id}`
+          `https://psg-backend-hvny.onrender.com/news/${id}`
         );
         setNews(response.data);
         setError(null);
